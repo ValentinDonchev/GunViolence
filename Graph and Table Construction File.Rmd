@@ -1,0 +1,65 @@
+---
+title: "Graph and Table Construction File"
+author: "Valentin Donchev"
+date: "September 15, 2020"
+output:
+  pdf_document:
+    latex_engine: xelatex
+mainfont: Times New Roman    
+---
+\fontsize{12}{21}
+\selectfont{}
+This file will be used to construct all my graphs and tables for the project.
+
+```{r, fig.width=15,fig.height=7, echo=FALSE, silent=TRUE, warning=FALSE, message=F}
+library(tidyverse)
+Data<-read.csv("file:///C:/Users/valdo/OneDrive - Hood College/Economics Departmental Honors/FinishedData.csv")
+
+#Police funding graph
+ggplot(Data %>% filter(PoliceFunding<=600), aes(x=PoliceFunding, y=GunMurders, color=Year)) + geom_point() + labs(x="Level of Police Funding Per Capita Per Year", y="Number of Gun Murders in each State Per Year", title="Police Funding vs Number of Gun Murders in Each State Per Year") + geom_smooth(method = "lm") + theme(plot.title = element_text(hjust = 0.5))
+
+#Gun Laws count graph
+ggplot(Data %>% filter(GunMurders<1200), aes(x=LAWTOTAL, y=GunMurders, color=Year)) + geom_point() + labs(x="Number of Gun Laws in a State", y="Number of Gun Murders in each State Per Year", title="Gun Laws vs Gun Murders") + geom_smooth(method = "lm") + theme(plot.title = element_text(hjust = 0.5))
+
+#Poverty rate graph
+ggplot(Data %>% filter(GunMurders<600), aes(x=Poverty, y=GunMurders, color=Year)) + geom_point() + labs(x="Poverty Rate", y="Number of Gun Murders in each State Per Year", title="Poverty Rate vs Gun Murders") + theme(plot.title = element_text(hjust = 0.5))
+
+#High School grad rate
+ggplot(Data %>% filter(GunMurders<650), aes(x=HSGradRate, y=GunMurders, color=Year)) + geom_point() + labs(x="High School Graduation Rate", y="Number of Gun Murders in each State Per Year", title="High School Graduation Rate vs Gun Murders") + theme(plot.title = element_text(hjust = 0.5))
+
+#Gun Ownership on Police Funding
+ggplot(Data %>% filter(GunMurders<600), aes(x=HouseholdFirearmRate, y=GunMurders, color=Year)) + geom_point() + labs(x="Household Firearm Rate", y="Number of Gun Murders in each State Per Year", title="Household Firearm Rate vs Number of Gun Murders in Each State Per Year") + theme(plot.title = element_text(hjust = 0.5))
+
+#Divorce rates on gun violence 
+ggplot(Data, aes(x=Divorce, y=GunMurders, color=Year)) + geom_point() + labs(x="Number of Women Divorced Per 1000", y="Number of Gun Murders in each State Per Year", title="Divorce Rate vs Gun Murders") + geom_smooth(method = "lm") + theme(plot.title = element_text(hjust = 0.5))
+
+#Divorce rates on high school graduation rate
+ggplot(Data, aes(x=Divorce, y=HSGradRate, color=Year)) + geom_point() + labs(x="Number of Women Divorced Per 1000", y="High School Graduation Rate in each State Per Year", title="Divorce Rate vs High School Graduation Rate") + geom_smooth(method = "lm") + theme(plot.title = element_text(hjust = 0.5))
+
+#Gallons of alcohol on gun violence
+ggplot(Data %>% filter(GunMurders<600), aes(x=GallonsOfAlcohol, y=GunMurders, color=Year)) + geom_point() + labs(x="Gallons of Ethanol Drank Per Person", y="Number of Gun Murders", title="Alcohol Consumption on Gun Violence") + theme(plot.title = element_text(hjust = 0.5))
+
+#Percent of population living in urban areas on gun violence
+ggplot(Data, aes(x=PopulationPercentUrban, y=GunMurders, color=Year)) + geom_point() + labs(x="Percent of State Population Living in Urban Area", y="Number of Gun Murders", title="Urban Residence on Gun Violence") + theme(plot.title = element_text(hjust = 0.5)) + geom_smooth(method = "auto")
+
+#Population Density on Gun Violence
+ggplot(Data %>% filter(PopulationDensity<2500), aes(x=PopulationDensity, y=GunMurders, color=Year)) + geom_point() + labs(x="Number of People Per Square Mile", y="Number of Gun Murders", title="Number of People Per Square Mile on Gun Violence") + theme(plot.title = element_text(hjust = 0.5)) + geom_smooth(method="auto")
+
+#Poverty Rate on Alcohol Consumption
+ggplot(Data, aes(x=Poverty, y=GallonsOfAlcohol, color=Year)) + geom_point() + labs(x="Poverty Rate", y="Gallons of Ethanol Consumed Per Capita", title="Poverty Rate on Alcohol Consumption") + theme(plot.title = element_text(hjust = 0.5)) + geom_smooth(method="lm")
+
+#Urban population on gun ownership
+ggplot(Data, aes(x=PopulationPercentUrban, y=HouseholdFirearmRate, color=Year)) + geom_point() + labs(x="Percent of Population Living in Urban Area", y="Firearm Ownership Rate", title="Living in an Urban Area on Gun Ownership") + theme(plot.title = element_text(hjust = 0.5)) + geom_smooth(method="lm")
+
+#Household firearm rate on police funding
+ggplot(Data, aes(x=HouseholdFirearmRate, y=PoliceFunding, color=Year)) + geom_point() + labs(x="Gun Ownership Rate", y="Police Funding Levels", title="Household Firearm Rate on Police Funding") + theme(plot.title = element_text(hjust = 0.5)) + geom_smooth(method="lm")
+
+#Number of gun laws on police funding
+ggplot(Data, aes(x=LAWTOTAL, y=PoliceFunding, color=Year)) + geom_point() + labs(x="Number of Gun Laws in a State", y="Police Funding Levels", title="Number of Gun Laws on Police Funding") + theme(plot.title = element_text(hjust = 0.5)) + geom_smooth(method="lm")
+
+#Percent of population living in urban area on police funding
+ggplot(Data %>% filter(PoliceFunding<600), aes(x=PopulationPercentUrban, y=PoliceFunding, color=Year)) + geom_point() + labs(x="Percent of Population Living in Urban Area", y="Police Funding Levels", title="Percent of Population Living in Urban Area on Police Funding") + theme(plot.title = element_text(hjust = 0.5)) + geom_smooth(method="lm")
+```
+
+
+
